@@ -1,0 +1,28 @@
+plugins {
+    id 'java-library'
+    id 'kotlin'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+jar {
+    manifest {
+        attributes("Lint-Registry-V2": "com.hynson.lint_lib.IssueRegister")
+    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    def lint_version = '27.0.1'
+    //noinspection DifferentStdlibGradleVersion
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    compileOnly 'com.android.tools.lint:lint-checks:'+lint_version
+    compileOnly 'com.android.tools.lint:lint-api:' + lint_version
+    compileOnly 'com.android.tools.lint:lint-gradle:' + lint_version
+    compileOnly 'com.android.tools.lint:lint:' + lint_version
+    testImplementation 'com.android.tools.lint:lint-tests:' + lint_version
+}

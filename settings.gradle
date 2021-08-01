@@ -1,0 +1,3 @@
+rootProject.name = "CustomLint"
+include ':app'
+include ':lint_lib'
