@@ -20,11 +20,11 @@ import org.jetbrains.uast.util.UastExpressionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
-public class ButterKnifeDetector extends Detector implements Detector.UastScanner {
-    private final String WM_ROUTER_PACKAGE = "com.sankuai.waimai.router";
-    private final String WM_ROUTER_ANNOTATION = WM_ROUTER_PACKAGE + ".annotation.RouterPage";
-    private final String WM_ROUTER_CALL = WM_ROUTER_PACKAGE + ".Router";
+//com.alibaba.android.arouter.facade.annotation.Route
+public class ARouterDetector extends Detector implements Detector.UastScanner {
+    private final String PACKAGE = "com.alibaba.android.arouter.facade";
+    private final String ANNOTATION = PACKAGE + ".annotation.Route";
+    private final String WM_ROUTER_CALL = PACKAGE + ".Router";
 
     static final Issue ISSUE = Issue.create(
             "router_annotation_issue",    //唯一 ID
@@ -34,7 +34,7 @@ public class ButterKnifeDetector extends Detector implements Detector.UastScanne
             6,
             Severity.WARNING,
             new Implementation(
-                    ButterKnifeDetector.class,
+                    ARouterDetector.class,
                     Scope.JAVA_FILE_SCOPE));
 
     static final Issue CALL_ISSUE = ISSUE.create("router_call_issue",    //唯一 ID
@@ -44,7 +44,7 @@ public class ButterKnifeDetector extends Detector implements Detector.UastScanne
             6,
             Severity.WARNING,
             new Implementation(
-                    ButterKnifeDetector.class,
+                    ARouterDetector.class,
                     Scope.JAVA_FILE_SCOPE));
 
     @Override
@@ -66,7 +66,7 @@ public class ButterKnifeDetector extends Detector implements Detector.UastScanne
 
             private void isAnnotation(UAnnotation node) {
                 String type = node.getQualifiedName();
-                if (WM_ROUTER_ANNOTATION.equals(type)) {
+                if (ANNOTATION.equals(type)) {
                     context.report(ISSUE, node, context.getLocation(node),
                             "该注解不允许使用");
                 }
@@ -74,8 +74,8 @@ public class ButterKnifeDetector extends Detector implements Detector.UastScanne
 
             @Override
             public void visitCallExpression(@NotNull UCallExpression node) {
-                checkIsMethod(node);
-                checkIsConstructorCall(node);
+                /*checkIsMethod(node);
+                checkIsConstructorCall(node);*/
             }
 
             private void checkIsConstructorCall(UCallExpression node) {
@@ -85,8 +85,8 @@ public class ButterKnifeDetector extends Detector implements Detector.UastScanne
                 UReferenceExpression classRef = node.getClassReference();
                 if (classRef != null) {
                     String className = UastUtils.getQualifiedName(classRef);
-                    String uriValue = WM_ROUTER_PACKAGE + ".common.DefaultUriRequest";
-                    String pageValue = WM_ROUTER_PACKAGE + ".common.DefaultPageUriRequest";
+                    String uriValue = PACKAGE + ".common.DefaultUriRequest";
+                    String pageValue = PACKAGE + ".common.DefaultPageUriRequest";
 
                     if (className.equals(uriValue) || className.equals(pageValue)) {
                         context.report(CALL_ISSUE, node, context.getLocation(node),

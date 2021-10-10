@@ -5,7 +5,10 @@ import com.android.tools.lint.detector.api.Issue
 
 class IssueRegister : IssueRegistry() {
     override val issues: List<Issue>
-        get() = arrayListOf(LogDetector.ISSUE,
+        get() = arrayListOf(
+            ButterKnifeDetector.ISSUE,
+            ARouterDetector.ISSUE,
+            LogDetector.ISSUE,
             ImageResourceDetector.ISSUE)
     override val api: Int = com.android.tools.lint.detector.api.CURRENT_API
     override val minApi: Int

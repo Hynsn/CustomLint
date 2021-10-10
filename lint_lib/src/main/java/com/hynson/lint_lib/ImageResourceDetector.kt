@@ -35,7 +35,7 @@ class ImageResourceDetector : Detector() ,Detector.ResourceFolderScanner{
         var ISSUE = Issue.create(
             "image too large",
             "Log Usage","Please use the unified LogUtil class!",
-            CORRECTNESS,6, Severity.ERROR,
+            CORRECTNESS,6, Severity.WARNING,
             Implementation(ImageResourceDetector::class.java,Scope.RESOURCE_FOLDER_SCOPE)
         )
 

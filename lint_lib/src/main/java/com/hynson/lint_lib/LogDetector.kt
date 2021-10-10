@@ -38,7 +38,7 @@ class LogDetector : Detector(), Detector.UastScanner {
         var ISSUE: Issue = Issue.create(
             "LogUsage",
             "禁止使用该方法", "Android.util.log()",
-            SECURITY, 5, Severity.ERROR,
+            SECURITY, 5, Severity.INFORMATIONAL,
             Implementation(LogDetector::class.java, Scope.JAVA_FILE_SCOPE)
         )
     }
