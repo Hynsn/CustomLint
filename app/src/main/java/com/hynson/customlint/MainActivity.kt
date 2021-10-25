@@ -10,7 +10,6 @@ import butterknife.ButterKnife
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 
-@Route(path = "/test/activity")
 class MainActivity : AppCompatActivity() {
 
     @BindView(R.id.btn_arouter)
@@ -29,6 +28,6 @@ class MainActivity : AppCompatActivity() {
             ARouter.getInstance().build("/test/activity").navigation()
         }
 
-//        Log.i("","")
+        Log.i("","")
     }
 }

@@ -15,7 +15,7 @@ jar {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compileOnly "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     def lint_version = '27.0.1'
     //noinspection DifferentStdlibGradleVersion
