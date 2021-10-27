@@ -8,11 +8,11 @@ import org.jetbrains.uast.util.isMethodCall
 
 class ButterKnifeDetector : Detector() ,Detector.UastScanner {
 
-    override fun getApplicableUastTypes(): List<Class<out UElement>>? {
+    override fun getApplicableUastTypes(): List<Class<out UElement>> {
         return listOf(UAnnotation::class.java)
     }
 
-    override fun createUastHandler(context: JavaContext): UElementHandler? {
+    override fun createUastHandler(context: JavaContext): UElementHandler {
         return object : UElementHandler() {
             override fun visitAnnotation(node: UAnnotation) {
                 isAnnotation(node)

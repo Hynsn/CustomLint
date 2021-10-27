@@ -9,6 +9,9 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
+import rx.Observable
+import rx.Subscription
+import rx.functions.Action1
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,5 +32,14 @@ class MainActivity : AppCompatActivity() {
         }
 
         Log.i("","")
+
+        callRxJava()
+    }
+
+    fun callRxJava(){
+        val s:Subscription = Observable.just("Test")
+            .subscribe(Action1 {
+                Log.i("1","2")
+            })
     }
 }

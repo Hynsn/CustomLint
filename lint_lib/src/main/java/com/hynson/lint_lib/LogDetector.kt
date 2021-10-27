@@ -22,13 +22,9 @@ class LogDetector : Detector(), Detector.UastScanner {
     }*/
 
     override fun visitMethodCall(context: JavaContext, node: UCallExpression, method: PsiMethod) {
-        super.visitMethodCall(context, node, method)
-        println("LogDetector:visitMethodCall ${method.name} ${context.getLocation(node).file.absolutePath}")
+        //println("LogDetector:visitMethodCall ${method.name} ${context.getLocation(node).file.absolutePath}")
         if (context.evaluator.isMemberInClass(method, "android.util.Log")) {
-            context.report(
-                ISSUE,
-                node,
-                context.getLocation(node),
+            context.report(ISSUE,node,context.getLocation(node),
                 "请勿直接调用android.util.Log，应该使用统一工具类"
             )
         }
