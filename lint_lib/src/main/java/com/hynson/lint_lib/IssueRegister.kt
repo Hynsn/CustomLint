@@ -7,8 +7,9 @@ class IssueRegister : IssueRegistry() {
     override val issues: List<Issue>
         get() = arrayListOf(
             SubscribeDetector.ISSUE,
-            ButterKnifeDetector.ISSUE,
-            ARouterDetector.ISSUE,
+            AnnotationDetector.ISSUE1,
+            AnnotationDetector.ISSUE2,
+            //ARouterDetector.ISSUE,
             LogDetector.ISSUE,
             ImageResourceDetector.ISSUE1)
     override val api: Int = com.android.tools.lint.detector.api.CURRENT_API

@@ -1,6 +1,7 @@
 package com.hynson.lint_lib
 
 import com.android.tools.lint.detector.api.*
+import com.android.tools.lint.detector.api.Category.Companion.SECURITY
 import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiMethod
 import com.intellij.psi.util.TypeConversionUtil
@@ -36,7 +37,7 @@ class SubscribeDetector : Detector() ,Detector.UastScanner {
     companion object {
         val ISSUE = Issue.create("RxSubscribeOnError", "Subscriber is missing onError handling",
             "Every Observable stream can report errors that should be handled using onError. Not implementing onError will throw an exception at runtime which can be hard to debug when the error is thrown on a Scheduler that is not the invoking thread.",
-            Category.CORRECTNESS, 8, Severity.INFORMATIONAL,
+            SECURITY, 8, Severity.INFORMATIONAL,
             Implementation(SubscribeDetector::class.java, Scope.JAVA_FILE_SCOPE)
         )
 
