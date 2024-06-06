@@ -2,8 +2,12 @@ package com.hynson.lint_lib
 
 import com.android.tools.lint.detector.api.*
 import com.android.tools.lint.detector.api.Category.Companion.SECURITY
+import com.intellij.psi.JavaElementVisitor
 import com.intellij.psi.PsiMethod
+import com.intellij.psi.PsiNewExpression
 import org.jetbrains.uast.UCallExpression
+import org.jetbrains.uast.UClass
+import org.jetbrains.uast.ULambdaExpression
 
 class LogDetector : Detector(), Detector.UastScanner {
     override fun getApplicableMethodNames(): List<String>? {
@@ -28,6 +32,19 @@ class LogDetector : Detector(), Detector.UastScanner {
                 "请勿直接调用android.util.Log，应该使用统一工具类"
             )
         }
+    }
+
+    override fun visitClass(context: JavaContext, declaration: UClass) {
+        super.visitClass(context, declaration)
+
+        println("=====${declaration.psi.javaClass.canonicalName}")
+    }
+
+    override fun visitConstructor(context: JavaContext, visitor: JavaElementVisitor?, node: PsiNewExpression, constructor: PsiMethod) {
+        super.visitConstructor(context, visitor, node, constructor)
+
+        println("=====${node.classReference?.javaClass}")
+
     }
 
     companion object{

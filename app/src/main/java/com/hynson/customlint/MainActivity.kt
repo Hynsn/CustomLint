@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         ButterKnife.bind(this);
         btnRoute.setOnClickListener {
             Log.i("","ddd")
-            tvTitle.text = "测试试用!"
+            tvTitle.text = resources.getString(R.string.hello_world)
             ARouter.getInstance().build("/test/activity").navigation()
         }
 

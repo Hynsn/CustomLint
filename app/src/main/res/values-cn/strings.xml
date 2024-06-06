@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">CustomLint</string>
+    <string name="button">按钮</string>
+    <string name="hello_world">你好世界</string>
+</resources>
